@@ -35,18 +35,20 @@ interface ValueState {
   okRiot?: boolean;
   okTwitter?: boolean;
   okWeb?: boolean;
+  okDiscord?: boolean;
+  okTelegram?: boolean;
 }
 
 const WHITESPACE = [' ', '\t'];
 
-function setData (data: Data, setActive: null | ((isActive: boolean) => void), setVal: (val: string) => void): void {
+function setData(data: Data, setActive: null | ((isActive: boolean) => void), setVal: (val: string) => void): void {
   if (data.isRaw) {
     setActive && setActive(true);
     setVal(u8aToString(data.asRaw.toU8a(true)));
   }
 }
 
-function WrapToggle ({ children, onChange, value }: WrapProps): React.ReactElement<WrapProps> {
+function WrapToggle({ children, onChange, value }: WrapProps): React.ReactElement<WrapProps> {
   const { t } = useTranslation();
 
   return (
@@ -62,7 +64,7 @@ function WrapToggle ({ children, onChange, value }: WrapProps): React.ReactEleme
   );
 }
 
-function checkValue (hasValue: boolean, value: string | null | undefined, minLength: number, includes: string[], excludes: string[], starting: string[], notStarting: string[] = WHITESPACE, notEnding: string[] = WHITESPACE): boolean {
+function checkValue(hasValue: boolean, value: string | null | undefined, minLength: number, includes: string[], excludes: string[], starting: string[], notStarting: string[] = WHITESPACE, notEnding: string[] = WHITESPACE): boolean {
   return !hasValue || (
     !!value &&
     (value.length >= minLength) &&
@@ -74,11 +76,11 @@ function checkValue (hasValue: boolean, value: string | null | undefined, minLen
   );
 }
 
-function IdentityMain ({ address, className = '', onClose }: Props): React.ReactElement<Props> {
+function IdentityMain({ address, className = '', onClose }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const identityOpt = useCall<Option<Registration>>(api.query.identity.identityOf, [address]);
-  const [{ info, okAll, okDisplay, okEmail, okLegal, okRiot, okTwitter, okWeb }, setInfo] = useState<ValueState>({ info: {}, okAll: false });
+  const [{ info, okAll, okDisplay, okEmail, okLegal, okRiot, okTwitter, okWeb, okDiscord, okTelegram }, setInfo] = useState<ValueState>({ info: {}, okAll: false });
   const [hasEmail, setHasEmail] = useState(false);
   const [hasLegal, setHasLegal] = useState(false);
   const [hasRiot, setHasRiot] = useState(false);
@@ -90,6 +92,10 @@ function IdentityMain ({ address, className = '', onClose }: Props): React.React
   const [valRiot, setValRiot] = useState('');
   const [valTwitter, setValTwitter] = useState('');
   const [valWeb, setValWeb] = useState('');
+  const [valDiscord, setValDiscord] = useState(() => (getAddressMeta(address).name || '').replace(/\(.*\)/, '').trim());
+  const [hasDiscord, setHasDiscord] = useState(false);
+  const [valTelegram, setValTelegram] = useState(() => (getAddressMeta(address).name || '').replace(/\(.*\)/, '').trim());
+  const [hasTelegram, setHasTelegram] = useState(false);
   const [gotPreviousIdentity, setGotPreviousIdentity] = useState(false);
 
   useEffect((): void => {
@@ -102,8 +108,10 @@ function IdentityMain ({ address, className = '', onClose }: Props): React.React
       setData(info.riot, setHasRiot, setValRiot);
       setData(info.twitter, setHasTwitter, setValTwitter);
       setData(info.web, setHasWeb, setValWeb);
+      setData(info.discord, setHasDiscord, setValDiscord);
+      setData(info.telegram, setHasTelegram, setValTelegram);
 
-      [info.display, info.email, info.legal, info.riot, info.twitter, info.web].some((info: Data) => {
+      [info.display, info.email, info.legal, info.riot, info.twitter, info.web, info.discord, info.telegram].some((info: Data) => {
         if (info.isRaw) {
           setGotPreviousIdentity(true);
 
@@ -122,6 +130,8 @@ function IdentityMain ({ address, className = '', onClose }: Props): React.React
     const okRiot = checkValue(hasRiot, valRiot, 6, [':'], WHITESPACE, ['@', '~']);
     const okTwitter = checkValue(hasTwitter, valTwitter, 3, [], WHITESPACE, ['@']);
     const okWeb = checkValue(hasWeb, valWeb, 8, ['.'], WHITESPACE, ['https://', 'http://']);
+    const okDiscord = checkValue(true, valDiscord, 1, [], [], []);
+    const okTelegram = checkValue(true, valTelegram, 1, [], [], []);
 
     setInfo({
       info: {
@@ -130,15 +140,19 @@ function IdentityMain ({ address, className = '', onClose }: Props): React.React
         legal: { [okLegal && hasLegal ? 'raw' : 'none']: okLegal && hasLegal ? valLegal : null },
         riot: { [okRiot && hasRiot ? 'raw' : 'none']: okRiot && hasRiot ? valRiot : null },
         twitter: { [okTwitter && hasTwitter ? 'raw' : 'none']: okTwitter && hasTwitter ? valTwitter : null },
-        web: { [okWeb && hasWeb ? 'raw' : 'none']: okWeb && hasWeb ? valWeb : null }
+        web: { [okWeb && hasWeb ? 'raw' : 'none']: okWeb && hasWeb ? valWeb : null },
+        discord: { [okDiscord ? 'raw' : 'none']: valDiscord || null },
+        telegram: { [okTelegram ? 'raw' : 'none']: valTelegram || null },
       },
-      okAll: okDisplay && okEmail && okLegal && okRiot && okTwitter && okWeb,
+      okAll: okDisplay && okEmail && okLegal && okRiot && okTwitter && okWeb && okDiscord && okTelegram,
       okDisplay,
       okEmail,
       okLegal,
       okRiot,
       okTwitter,
-      okWeb
+      okWeb,
+      okDiscord,
+      okTelegram,
     });
   }, [hasEmail, hasLegal, hasRiot, hasTwitter, hasWeb, valDisplay, valEmail, valLegal, valRiot, valTwitter, valWeb]);
 
@@ -218,6 +232,37 @@ function IdentityMain ({ address, className = '', onClose }: Props): React.React
             value={hasTwitter ? valTwitter : '<none>'}
           />
         </WrapToggle>
+
+        <WrapToggle
+          onChange={setHasDiscord}
+          value={hasDiscord}
+        >
+          <Input
+            help={t<string>('The twitter name for this identity.')}
+            isDisabled={!hasDiscord}
+            isError={!okDiscord}
+            label={t<string>('discord')}
+            onChange={setValDiscord}
+            placeholder={t('nickname#tag')}
+            value={hasDiscord ? valDiscord : '<none>'}
+          />
+        </WrapToggle>
+
+        <WrapToggle
+          onChange={setHasTelegram}
+          value={hasTelegram}
+        >
+          <Input
+            help={t<string>('The twitter name for this identity.')}
+            isDisabled={!hasTelegram}
+            isError={!okTelegram}
+            label={t<string>('telegram')}
+            onChange={setValTelegram}
+            placeholder={t('telegram format')}
+            value={hasTelegram ? valTelegram : '<none>'}
+          />
+        </WrapToggle>
+
         <WrapToggle
           onChange={setHasRiot}
           value={hasRiot}

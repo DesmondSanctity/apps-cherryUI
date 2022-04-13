@@ -21,7 +21,7 @@ interface Props {
 
 const SUBS_DISPLAY_THRESHOLD = 4;
 
-function Identity ({ address, identity }: Props): React.ReactElement<Props> | null {
+function Identity({ address, identity }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const { isRegistrar, registrars } = useRegistrars();
@@ -37,7 +37,7 @@ function Identity ({ address, identity }: Props): React.ReactElement<Props> | nu
         value={sub}
       />
     )
-  , [subs]
+    , [subs]
   );
 
   if (!identity || !identity.isExistent || !api.query.identity?.identityOf) {
@@ -143,6 +143,22 @@ function Identity ({ address, identity }: Props): React.ReactElement<Props> | nu
                 <div className='th'>{t<string>('riot')}</div>
                 <div className='td'>
                   {identity.riot}
+                </div>
+              </div>
+            )}
+            {identity.discord && (
+              <div className='tr'>
+                <div className='th'>{t<string>('riot')}</div>
+                <div className='td'>
+                  {identity.discord}
+                </div>
+              </div>
+            )}
+            {identity.telegram && (
+              <div className='tr'>
+                <div className='th'>{t<string>('riot')}</div>
+                <div className='td'>
+                  {identity.telegram}
                 </div>
               </div>
             )}

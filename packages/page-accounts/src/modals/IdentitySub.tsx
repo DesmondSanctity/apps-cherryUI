@@ -29,7 +29,7 @@ interface SubProps {
   t: TFunction;
 }
 
-function extractInfo ([[ids], opts]: [[string[]], Option<ITuple<[AccountId, Data]>>[]]): [string, string][] {
+function extractInfo([[ids], opts]: [[string[]], Option<ITuple<[AccountId, Data]>>[]]): [string, string][] {
   return ids.reduce((result: [string, string][], id, index): [string, string][] => {
     const opt = opts[index];
 
@@ -45,7 +45,7 @@ function extractInfo ([[ids], opts]: [[string[]], Option<ITuple<[AccountId, Data
   }, []);
 }
 
-function IdentitySub ({ address, index, name, setAddress, setName, t }: SubProps): React.ReactElement<SubProps> {
+function IdentitySub({ address, index, name, setAddress, setName, t }: SubProps): React.ReactElement<SubProps> {
   const _setAddress = useCallback(
     (value?: string | null) => setAddress(index, value || ''),
     [index, setAddress]
@@ -82,7 +82,7 @@ const IdentitySubMemo = React.memo(IdentitySub);
 
 const transformInfo = { withParams: true };
 
-function IdentitySubModal ({ address, className, onClose }: Props): React.ReactElement<Props> {
+function IdentitySubModal({ address, className, onClose }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const { allAccounts } = useAccounts();
