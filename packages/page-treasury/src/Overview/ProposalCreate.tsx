@@ -22,6 +22,7 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
   const [beneficiary, setBeneficiary] = useState<string | null>(null);
   const [isOpen, toggleOpen] = useToggle();
   const [value, setValue] = useState<BN | undefined>();
+  const [segment, setSegment] = useState<number | undefined>();
   const hasValue = value?.gtn(0);
 
   const bondPercentage = useMemo(
@@ -81,6 +82,12 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
                 help={t<string>('The minimum amount that will be bonded')}
                 isDisabled
                 label={t<string>('minimum bond')}
+              />
+              <InputBalance
+                help={t<string>('todo: segment text')}
+                label={t<string>('segments')}
+                onChange={setSegment}
+                value={segment}
               />
               <MarkWarning content={t<string>('Be aware that once submitted the proposal will be put to a council vote. If the proposal is rejected due to a lack of info, invalid requirements or non-benefit to the network as a whole, the full bond posted (as describe above) will be lost.')} />
             </Modal.Columns>
