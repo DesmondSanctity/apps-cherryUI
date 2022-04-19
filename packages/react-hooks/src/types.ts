@@ -101,6 +101,8 @@ export interface AddressFlags extends DeriveAccountFlags {
 }
 
 export interface AddressIdentity extends DeriveAccountRegistration {
+  discord?: string;
+  telegram?: string;
   isExistent: boolean;
   isKnownGood: boolean;
   waitCount: number;
