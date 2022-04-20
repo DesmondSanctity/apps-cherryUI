@@ -35,12 +35,19 @@ function Overview ({ className, isMember, members }: Props): React.ReactElement<
         isMember={isMember}
         members={members}
         proposals={info?.proposals}
+        type='segments'
+      />
+      <Proposals
+        isMember={isMember}
+        members={members}
+        proposals={info?.proposals}
       />
       <Proposals
         isApprovals
         isMember={isMember}
         members={members}
         proposals={info?.approvals}
+        type='approvals'
       />
     </div>
   );

@@ -13,27 +13,40 @@ import Proposal from './Proposal';
 interface Props {
   className?: string;
   isApprovals?: boolean;
+  type?: 'proposals' | 'approvals' | 'segments';
   isMember: boolean;
   members: string[];
   proposals?: DeriveTreasuryProposal[];
 }
 
-function ProposalsBase ({ className = '', isApprovals, isMember, members, proposals }: Props): React.ReactElement<Props> {
+function ProposalsBase ({ className = '', isApprovals, isMember, members, proposals, type = 'proposals' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
 
+  const headerText = useMemo(() => ({
+    approvals: t<string>('Approved'),
+    proposals: t<string>('Proposals'),
+    segments: t<string>('Segments')
+  }), [t]);
+
+  const emptyText = useMemo(() => ({
+    approvals: t<string>('No pending proposals'),
+    proposals: t<string>('No approved proposals'),
+    segments: t<string>('No pending segments')
+  }), [t]);
+
   const header = useMemo(() => [
-    [isApprovals ? t<string>('Approved') : t<string>('Proposals'), 'start', 2],
+    [headerText[type], 'start', 2],
     [t('beneficiary'), 'address'],
     [t('payment')],
     [t('bond')],
     [],
     []
-  ], [isApprovals, t]);
+  ], [headerText, t, type]);
 
   return (
     <Table
       className={className}
-      empty={proposals && (isApprovals ? t<string>('No approved proposals') : t<string>('No pending proposals'))}
+      empty={proposals && emptyText[type]}
       header={header}
     >
       {proposals?.map((proposal): React.ReactNode => (
