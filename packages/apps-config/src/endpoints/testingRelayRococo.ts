@@ -61,6 +61,14 @@ export function createRococo (t: TFunction): EndpointOption {
       },
       // add any additional parachains here, alphabetical
       {
+        info: 'arctic',
+        paraId: 3025,
+        text: t('rpc.rococo.arctic', 'Arctic', { ns: 'apps-config' }),
+        providers: {
+          Arctic: 'wss://arctic-rpc-parachain.icenetwork.io:9944'
+        }
+      },
+      {
         info: 'rococoBasilisk',
         paraId: 2090,
         text: t('rpc.rococo.basilisk', 'Basilisk', { ns: 'apps-config' }),
@@ -74,6 +82,14 @@ export function createRococo (t: TFunction): EndpointOption {
         text: t('rpc.rococo.catalyst', 'Catalyst', { ns: 'apps-config' }),
         providers: {
           Centrifuge: 'wss://fullnode.catalyst.cntrfg.com'
+        }
+      },
+      {
+        info: 'rococoDolphin',
+        paraId: 2084,
+        text: t('rpc.rococo.dolphin', 'Dolphin', { ns: 'apps-config' }),
+        providers: {
+          'Manta Network': 'wss://anjie.rococo.dolphin.engineering'
         }
       },
       {
@@ -162,7 +178,7 @@ export function createRococo (t: TFunction): EndpointOption {
         paraId: 2050,
         text: t('rpc.rococo.zeitgeist', 'Zeitgeist PC', { ns: 'apps-config' }),
         providers: {
-          Zeitgeist: 'wss://roc.zeitgeist.pm'
+          Zeitggeist: 'wss://roc.zeitgeist.pm'
         }
       }
     ]
