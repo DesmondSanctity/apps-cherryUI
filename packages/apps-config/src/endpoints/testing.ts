@@ -133,6 +133,7 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
     },
     {
       info: 'dolphin',
+      isDisabled: true, // https://github.com/polkadot-js/apps/issues/7439
       text: t('rpc.dolphin', 'Dolphin Testnet', { ns: 'apps-config' }),
       providers: {
         'Dolphin Testnet': 'wss://trillian.dolphin.red'
@@ -366,13 +367,6 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       text: t('rpc.test.opportunity', 'Opportunity', { ns: 'apps-config' }),
       providers: {
         'Standard Protocol': 'wss://rpc.opportunity.standard.tech'
-      }
-    },
-    {
-      info: 'origintrail-parachain-testnet',
-      text: t('rpc.test.origintrail', 'OriginTrail Parachain Testnet', { ns: 'apps-config' }),
-      providers: {
-        'Trace Labs': 'wss://parachain-rpc.origin-trail.network'
       }
     },
     {

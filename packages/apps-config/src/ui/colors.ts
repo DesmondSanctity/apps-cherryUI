@@ -27,6 +27,7 @@ const chainBitCountry = '#191a2e';
 const chainBitCountryPioneer = '#000000';
 const chainBasiliskTestnet = `url(${String(nodeBasiliskRococo)}) #000`;
 const chainBeastEave = '#900048';
+const chainBitgreen = '#13F513';
 const chainCalamari = '#000000';
 const chainCoinversation = '#e6017a';
 const chainCompetitorsClub = '#213830';
@@ -69,6 +70,7 @@ const chainMoonsama = '#000000';
 const chainNeumann = '#A8278C';
 const chainNFTMart = '#815287';
 const chainNodle = '#1ab394';
+const chainOriginTrail = '#FB5DEB';
 const chainPangolin = '#5744ff';
 const chainPangoro = '#5745de';
 const chainParallel = '#ef18ac';
@@ -132,6 +134,7 @@ const chainUnique = '#40BCFF';
 const chainIdavoll = '#ff43ff';
 const chainSubDAO = 'linear-gradient(50deg, #F20092 0%, #FF4D5D 100%)';
 const chainSwapdex = '#E94082';
+const chainT0rn = '#212322';
 const chainTinker = '#161616';
 const chainTrustBase = '#ff43aa';
 const chainTuring = '#A8278C';
@@ -185,7 +188,6 @@ const nodeNFTMart = '#307182';
 const nodeNodle = '#1ab394';
 const nodeOdyssey = '#1295F0';
 const nodeOpportunity = '#6143bc';
-const nodeOriginTrail = '#131415';
 const nodePangolin = '#5744ff';
 const nodePangoro = '#5745de';
 const nodeParallel = '#ef18ac';
@@ -250,6 +252,7 @@ export const chainColors: Record<string, string> = Object.entries({
   'Bifrost PC1': chainRoccoBifrost,
   'Bifrost Stage Testnet': chainRoccoBifrost,
   'Bit.Country Tewai Chain': chainBitCountry,
+  BitgreenRococo: chainBitgreen,
   'Calamari Parachain': chainCalamari,
   'Calamari Parachain Development': chainCalamari,
   'Calamari Parachain Local': chainCalamari,
@@ -358,8 +361,7 @@ export const chainColors: Record<string, string> = Object.entries({
   'Nodle Testing Parachain': chainNodle,
   Odyssey: nodeOdyssey,
   'Opal Node': chainOpal,
-  'OriginTrail Parachain': nodeOriginTrail,
-  'OriginTrail Parachain Testnet': nodeOriginTrail,
+  'OriginTrail Parachain': chainOriginTrail,
   Pangolin: chainPangolin,
   'Pangolin Parachain': chainPangolin,
   Pangoro: chainPangoro,
@@ -409,6 +411,7 @@ export const chainColors: Record<string, string> = Object.entries({
   'SubGame Staging': nodeSubGame,
   Subspace: nodeSubspace,
   swapdex: chainSwapdex,
+  t0rn: chainT0rn,
   Tick: chainRoccoTick,
   Track: chainRoccoTrack,
   Trick: chainRoccoTrick,
@@ -450,6 +453,7 @@ export const nodeColors = Object.entries({
   centrifuge: nodeCentrifuge,
   'centrifuge chain': nodeCentrifuge,
   'Centrifuge Chain Node': nodeCentrifuge,
+  'Circuit Collator': chainT0rn,
   Coinversation: nodeCoinversation,
   'Competitors Club': nodeCompetitorsClub,
   'Crown Sterling': nodeCrownSterling,
@@ -490,7 +494,6 @@ export const nodeColors = Object.entries({
   'nodle chain node': nodeNodle,
   'Opal Node': nodeOpal,
   'Opportunity Standalone Testnet': nodeOpportunity,
-  'OriginTrail Parachain': nodeOriginTrail,
   Pangolin: nodePangolin,
   'Pangolin Parachain': nodePangolin,
   Pangoro: nodePangoro,

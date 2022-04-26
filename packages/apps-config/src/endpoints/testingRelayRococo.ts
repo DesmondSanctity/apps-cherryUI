@@ -62,6 +62,7 @@ export function createRococo (t: TFunction): EndpointOption {
       // add any additional parachains here, alphabetical
       {
         info: 'arctic',
+        isUnreachable: true, // https://github.com/polkadot-js/apps/issues/7420
         paraId: 3025,
         text: t('rpc.rococo.arctic', 'Arctic', { ns: 'apps-config' }),
         providers: {
@@ -74,6 +75,14 @@ export function createRococo (t: TFunction): EndpointOption {
         text: t('rpc.rococo.basilisk', 'Basilisk', { ns: 'apps-config' }),
         providers: {
           'Galactic Council': 'wss://rpc-01.basilisk-rococo.hydradx.io'
+        }
+      },
+      {
+        info: 'rococoBitgreen',
+        paraId: 3024,
+        text: t('rpc.rococo.bitgreen', 'Bitgreen', { ns: 'apps-config' }),
+        providers: {
+          Bitgreen: 'wss://rococobitgreen.abhath-labs.com'
         }
       },
       {
@@ -98,6 +107,14 @@ export function createRococo (t: TFunction): EndpointOption {
         text: t('rpc.rococo.efinity.io', 'Efinity', { ns: 'apps-config' }),
         providers: {
           Efinity: 'wss://rpc.rococo.efinity.io'
+        }
+      },
+      {
+        info: 'rococoGenshiro',
+        paraId: 2024,
+        text: t('rpc.rococo.genshiro', 'Genshiro Rococo Testnet', { ns: 'apps-config' }),
+        providers: {
+          Equilibrium: 'wss://parachain-testnet.equilab.io/rococo/collator/node1/wss'
         }
       },
       {
@@ -170,6 +187,14 @@ export function createRococo (t: TFunction): EndpointOption {
         text: t('rpc.rococo.spreehafen', 'Spreehafen', { ns: 'apps-config' }),
         providers: {
           DataHighway: 'wss://spreehafen.datahighway.com'
+        }
+      },
+      {
+        info: 't0rn',
+        paraId: 3333,
+        text: t('rpc.rococo.t3rn', 't0rn', { ns: 'apps-config' }),
+        providers: {
+          t3rn: 'wss://dev.net.t3rn.io'
         }
       },
       {
