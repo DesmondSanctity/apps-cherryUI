@@ -5,7 +5,7 @@ import type { BN } from '@polkadot/util';
 
 import React, { useMemo, useState } from 'react';
 
-import { Button, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton } from '@polkadot/react-components';
+import { Button, Input, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 import { BN_HUNDRED, BN_MILLION } from '@polkadot/util';
 
@@ -15,7 +15,7 @@ interface Props {
   className?: string;
 }
 
-function Propose ({ className }: Props): React.ReactElement<Props> | null {
+function Propose({ className }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const [accountId, setAccountId] = useState<string | null>(null);
@@ -83,11 +83,11 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
                 isDisabled
                 label={t<string>('minimum bond')}
               />
-              <InputBalance
+              <Input
                 help={t<string>('todo: segment text')}
                 label={t<string>('segments')}
+                type="number"
                 onChange={setSegment}
-                value={segment}
               />
               <MarkWarning content={t<string>('Be aware that once submitted the proposal will be put to a council vote. If the proposal is rejected due to a lack of info, invalid requirements or non-benefit to the network as a whole, the full bond posted (as describe above) will be lost.')} />
             </Modal.Columns>
@@ -99,7 +99,7 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
               isDisabled={!accountId || !hasValue}
               label={t<string>('Submit proposal')}
               onStart={toggleOpen}
-              params={[value, beneficiary]}
+              params={[value, beneficiary, segment]}
               tx={api.tx.treasury.proposeSpend}
             />
           </Modal.Actions>
