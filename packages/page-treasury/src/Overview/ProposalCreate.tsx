@@ -90,14 +90,6 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
                 type="number"
                 onChange={setSegment}
               />
-              {/* <Dropdown
-                help={t<string>('select cycle for this proposal')}
-                label={t<string>('cycle')}
-                options={cycleRef.current}
-                value={cycle}
-                onChange={setCycle}
-                placeholder={'choose the cycle for this proposal'}
-              /> */}
               <Toggle
                 label={t<string>('select if this cycle, else next cycle')}
                 onChange={setCycle}
