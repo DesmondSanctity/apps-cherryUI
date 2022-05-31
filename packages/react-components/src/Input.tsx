@@ -37,7 +37,7 @@ interface Props {
   name?: string;
   onEnter?: boolean | (() => void);
   onEscape?: () => void;
-  onChange?: (value: string) => void;
+  onChange?: (value: string | number) => void;
   onBlur?: () => void;
   onKeyDown?: (event: React.KeyboardEvent<Element>) => void;
   onKeyUp?: (event: React.KeyboardEvent<Element>) => void;

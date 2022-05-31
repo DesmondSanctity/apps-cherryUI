@@ -5,7 +5,7 @@ import type { BN } from '@polkadot/util';
 
 import React, { useMemo, useState } from 'react';
 
-import { Button, Input, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton } from '@polkadot/react-components';
+import { Button, Input, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton, Toggle } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 import { BN_HUNDRED, BN_MILLION } from '@polkadot/util';
 
@@ -22,7 +22,8 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
   const [beneficiary, setBeneficiary] = useState<string | null>(null);
   const [isOpen, toggleOpen] = useToggle();
   const [value, setValue] = useState<BN | undefined>();
-  const [segment, setSegment] = useState<number | undefined>();
+  const [segment, setSegment] = useState<string | number | undefined>();
+  const [cycle, setCycle] = useState(false);
   const hasValue = value?.gtn(0);
 
   const bondPercentage = useMemo(
@@ -84,10 +85,23 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
                 label={t<string>('minimum bond')}
               />
               <Input
-                help={t<string>('todo: segment text')}
+                help={t<string>('duration of proposal')}
                 label={t<string>('segments')}
                 type="number"
                 onChange={setSegment}
+              />
+              {/* <Dropdown
+                help={t<string>('select cycle for this proposal')}
+                label={t<string>('cycle')}
+                options={cycleRef.current}
+                value={cycle}
+                onChange={setCycle}
+                placeholder={'choose the cycle for this proposal'}
+              /> */}
+              <Toggle
+                label={t<string>('select if this cycle, else next cycle')}
+                onChange={setCycle}
+                value={cycle}
               />
               <MarkWarning content={t<string>('Be aware that once submitted the proposal will be put to a council vote. If the proposal is rejected due to a lack of info, invalid requirements or non-benefit to the network as a whole, the full bond posted (as describe above) will be lost.')} />
             </Modal.Columns>
@@ -99,7 +113,7 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
               isDisabled={!accountId || !hasValue}
               label={t<string>('Submit proposal')}
               onStart={toggleOpen}
-              params={[value, beneficiary, segment]}
+              params={[value, beneficiary, segment, cycle]}
               tx={api.tx.treasury.proposeSpend}
             />
           </Modal.Actions>
