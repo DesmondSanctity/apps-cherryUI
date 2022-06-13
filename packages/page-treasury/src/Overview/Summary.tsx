@@ -28,7 +28,6 @@ function Summary ({ approvalCount, proposalCount }: Props): React.ReactElement<P
     () => value && value.sub(pendingBounties).sub(pendingProposals),
     [value, pendingBounties, pendingProposals]
   );
-
   return (
     <SummaryBox>
       <section>
