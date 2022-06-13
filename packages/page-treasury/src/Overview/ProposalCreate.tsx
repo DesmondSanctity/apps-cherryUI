@@ -53,7 +53,7 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
             <Modal.Columns hint={t<string>('The beneficiary will receive the full amount if the proposal passes.')}>
               <InputAddress
                 help={t<string>('The account to which the proposed balance will be transferred if approved')}
-                label={t<string>('beneficiary')}
+                label={t<string>('Beneficiary')}
                 onChange={setBeneficiary}
                 type='allPlus'
               />
@@ -69,12 +69,12 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
               <InputBalance
                 help={t<string>('The amount that will be allocated from the treasury pot')}
                 isError={!hasValue}
-                label={t<string>('value')}
+                label={t<string>('Value')}
                 onChange={setValue}
               />
               <Static
                 help={t<string>('The on-chain percentage for the treasury')}
-                label={t<string>('proposal bond')}
+                label={t<string>('Proposal bond')}
               >
                 {bondPercentage}
               </Static>
@@ -82,16 +82,16 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
                 defaultValue={api.consts.treasury.proposalBondMinimum.toString()}
                 help={t<string>('The minimum amount that will be bonded')}
                 isDisabled
-                label={t<string>('minimum bond')}
+                label={t<string>('Minimum bond')}
               />
               <Input
-                help={t<string>('duration of proposal')}
-                label={t<string>('segments')}
+                help={t<string>('Duration of proposal')}
+                label={t<string>('Segments')}
                 type="number"
                 onChange={setSegment}
               />
               <Toggle
-                label={t<string>('select if this cycle, else next cycle')}
+                label={t<string>('Select this or the next cycle')}
                 onChange={setCycle}
                 value={cycle}
               />
