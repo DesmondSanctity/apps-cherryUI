@@ -44,7 +44,7 @@ function Propose({ className }: Props): React.ReactElement<Props> | null {
             <Modal.Columns hint={t<string>('This account will make the proposal and be responsible for the bond.')}>
               <InputAddress
                 help={t<string>('Select the account you wish to submit the proposal from.')}
-                label={t<string>('submit with account')}
+                label={t<string>('Submit with account')}
                 onChange={setAccountId}
                 type='account'
                 withLabel
