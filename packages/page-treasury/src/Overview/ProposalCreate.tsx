@@ -5,7 +5,7 @@ import type { BN } from '@polkadot/util';
 
 import React, { useMemo, useState } from 'react';
 
-import { Button, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton } from '@polkadot/react-components';
+import { Button, Input, InputAddress, InputBalance, MarkWarning, Modal, Static, TxButton, Toggle } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 import { BN_HUNDRED, BN_MILLION } from '@polkadot/util';
 
@@ -15,13 +15,15 @@ interface Props {
   className?: string;
 }
 
-function Propose ({ className }: Props): React.ReactElement<Props> | null {
+function Propose({ className }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const [accountId, setAccountId] = useState<string | null>(null);
   const [beneficiary, setBeneficiary] = useState<string | null>(null);
   const [isOpen, toggleOpen] = useToggle();
   const [value, setValue] = useState<BN | undefined>();
+  const [segment, setSegment] = useState<string | number | undefined>();
+  const [cycle, setCycle] = useState(false);
   const hasValue = value?.gtn(0);
 
   const bondPercentage = useMemo(
@@ -42,7 +44,7 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
             <Modal.Columns hint={t<string>('This account will make the proposal and be responsible for the bond.')}>
               <InputAddress
                 help={t<string>('Select the account you wish to submit the proposal from.')}
-                label={t<string>('submit with account')}
+                label={t<string>('Submit with account')}
                 onChange={setAccountId}
                 type='account'
                 withLabel
@@ -51,7 +53,7 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
             <Modal.Columns hint={t<string>('The beneficiary will receive the full amount if the proposal passes.')}>
               <InputAddress
                 help={t<string>('The account to which the proposed balance will be transferred if approved')}
-                label={t<string>('beneficiary')}
+                label={t<string>('Beneficiary')}
                 onChange={setBeneficiary}
                 type='allPlus'
               />
@@ -67,12 +69,12 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
               <InputBalance
                 help={t<string>('The amount that will be allocated from the treasury pot')}
                 isError={!hasValue}
-                label={t<string>('value')}
+                label={t<string>('Value')}
                 onChange={setValue}
               />
               <Static
                 help={t<string>('The on-chain percentage for the treasury')}
-                label={t<string>('proposal bond')}
+                label={t<string>('Proposal bond')}
               >
                 {bondPercentage}
               </Static>
@@ -80,7 +82,18 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
                 defaultValue={api.consts.treasury.proposalBondMinimum.toString()}
                 help={t<string>('The minimum amount that will be bonded')}
                 isDisabled
-                label={t<string>('minimum bond')}
+                label={t<string>('Minimum bond')}
+              />
+              <Input
+                help={t<string>('Duration of proposal')}
+                label={t<string>('Segments')}
+                type="number"
+                onChange={setSegment}
+              />
+              <Toggle
+                label={t<string>('Select this or the next cycle')}
+                onChange={setCycle}
+                value={cycle}
               />
               <MarkWarning content={t<string>('Be aware that once submitted the proposal will be put to a council vote. If the proposal is rejected due to a lack of info, invalid requirements or non-benefit to the network as a whole, the full bond posted (as describe above) will be lost.')} />
             </Modal.Columns>
@@ -92,7 +105,7 @@ function Propose ({ className }: Props): React.ReactElement<Props> | null {
               isDisabled={!accountId || !hasValue}
               label={t<string>('Submit proposal')}
               onStart={toggleOpen}
-              params={[value, beneficiary]}
+              params={[value, beneficiary, segment, cycle]}
               tx={api.tx.treasury.proposeSpend}
             />
           </Modal.Actions>

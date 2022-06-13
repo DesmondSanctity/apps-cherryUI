@@ -30,7 +30,6 @@ function ProposalDisplay ({ className = '', isMember, members, proposal: { counc
       .length,
     [council]
   );
-
   return (
     <tr className={className}>
       <td className='number'>

@@ -95,6 +95,7 @@ import nodeCrab from './nodes/crab.svg';
 import nodeCrownSterling from './nodes/crown-sterling.png';
 import nodeCrust from './nodes/crust.svg';
 import nodeCrustMaxwell from './nodes/crust-maxwell.svg';
+import nodeCherryMainnet from './nodes/cherry_mainnet.png';
 import nodeCrustParachain from './nodes/crustParachain.svg';
 import nodeDaliTestnet from './nodes/dali.png';
 import nodeDarwinia from './nodes/darwinia.png';
@@ -235,6 +236,7 @@ export const chainLogos = Object.entries({
   'Creditcoin Testnet': chainCreditcoinTest,
   'Crown Sterling': chainCrownSterling,
   'Crust Maxwell': nodeCrustMaxwell,
+  'Cherry Mainnet': nodeCherryMainnet,
   'Crust PC1': nodeCrust,
   'darwinia crab': nodeCrab,
   'Darwinia Crab PC2': nodeCrab,

@@ -44,7 +44,7 @@ function Toggle ({ className = '', isDisabled, isOverlay, isRadio, label, onChan
 export default React.memo(styled(Toggle)`
   > label {
     display: inline-block;
-    margin: 0 0.5rem;
+    margin: 1.5rem 2rem;
   }
 
   > label,
