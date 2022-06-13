@@ -8,6 +8,7 @@ import React, { useMemo } from 'react';
 import { AddressMini, Expander } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate';
+import VotingPower from '@polkadot/react-query/VotingPower';
 
 interface Props {
   isAye?: boolean;
@@ -16,7 +17,7 @@ interface Props {
   threshold: MemberCount;
 }
 
-function Voters ({ isAye, members, threshold, votes }: Props): React.ReactElement<Props> | null {
+function Voters({ isAye, members, threshold, votes }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
 
   const count = useMemo(
@@ -46,11 +47,17 @@ function Voters ({ isAye, members, threshold, votes }: Props): React.ReactElemen
       }
     >
       {votes.map((address): React.ReactNode => (
-        <AddressMini
-          key={address.toString()}
-          value={address}
-          withBalance={false}
-        />
+        <>
+          <AddressMini
+            key={address.toString()}
+            value={address}
+            withBalance={false}
+          />
+          <VotingPower
+            className='ui label'
+            params={address}
+          />
+        </>
       ))}
     </Expander>
   );
