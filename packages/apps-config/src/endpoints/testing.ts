@@ -75,6 +75,13 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
+      info: 'cherrynetwork',
+      text: t('rpc.test.cherrynetwork', 'Testnet - Cherry Network', { ns: 'apps-config' }),
+      providers: {
+        'Cherry Testnet': 'wss://testnet-seeder.cherry.place:443'
+      }
+    },
+    {
       info: 'clover',
       isDisabled: true, // Cannot construct unknown type BridgeNetworks
       text: t('rpc.test.clover.finance', 'Clover', { ns: 'apps-config' }),

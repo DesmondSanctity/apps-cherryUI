@@ -49,6 +49,13 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       }
     },
     {
+      info: 'cherry',
+      text: t('rpc.prod.cherry', 'Cherry Network', { ns: 'apps-config' }),
+      providers: {
+        ChainX: 'wss://seeder-1.cherry.place:443'
+      }
+    },
+    {
       // this is also a duplicate as a parachain under Polkadot and Testing net -
       // it is either/or, not and
       info: 'coinversation',
