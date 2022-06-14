@@ -28,7 +28,7 @@ interface Props {
 function createExternals (t: TFunction): ItemRoute[] {
   return [
     {
-      href: 'https://github.com/CherryNetwork',
+      href: 'https://github.com/CherryNetwork/apps',
       icon: 'code-branch',
       name: 'github',
       text: t<string>('nav.github', 'GitHub', { ns: 'apps-routing' })
