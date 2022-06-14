@@ -49,10 +49,11 @@ export function createProduction (t: TFunction, firstOnly: boolean, withSort: bo
       }
     },
     {
+      dnslink: 'cherry',
       info: 'cherry',
-      text: t('rpc.prod.cherry', 'Cherry Network', { ns: 'apps-config' }),
+      text: t('rpc.prod.cherry', 'Cherry Network Mainnet', { ns: 'apps-config' }),
       providers: {
-        ChainX: 'wss://seeder-1.cherry.place:443'
+        'Cherry Labs': 'wss://seeder-1.cherry.place:443'
       }
     },
     {

@@ -75,10 +75,10 @@ export function createTesting (t: TFunction, firstOnly: boolean, withSort: boole
       }
     },
     {
-      info: 'cherrynetwork',
-      text: t('rpc.test.cherrynetwork', 'Testnet - Cherry Network', { ns: 'apps-config' }),
+      info: 'cherry',
+      text: t('rpc.test.cherry', 'Cherry Network Testnet', { ns: 'apps-config' }),
       providers: {
-        'Cherry Testnet': 'wss://testnet-seeder.cherry.place:443'
+        'Cherry Labs': 'wss://testnet-seeder.cherry.place:443'
       }
     },
     {
