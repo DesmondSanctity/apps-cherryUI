@@ -153,6 +153,8 @@ const nodeBasilisk = '#9eec1b';
 const nodeBitCountry = '#191a2e';
 const nodeBifrost = '#5a25f0';
 const nodeCentrifuge = '#fcc367';
+const nodeCherryMainnet = '#EA27C3';
+const nodeCherryTestnet = '#EA27C3';
 const nodeCoinversation = '#e6017a';
 const nodeCompetitorsClub = '#213830';
 const nodeCrownSterling = '#13264b';
@@ -257,6 +259,8 @@ export const chainColors: Record<string, string> = Object.entries({
   'Canvas on Rococo': chainRococoCanvas,
   Centrifuge: nodeCentrifuge,
   ChainX: chainChainx,
+  'Cherry Mainnet': nodeCherryMainnet,
+  'Cherry Testnet': nodeCherryTestnet,
   Clover: chainClover,
   Coinversation: chainCoinversation,
   'Competitors Club': chainCompetitorsClub,
@@ -450,6 +454,8 @@ export const nodeColors = Object.entries({
   centrifuge: nodeCentrifuge,
   'centrifuge chain': nodeCentrifuge,
   'Centrifuge Chain Node': nodeCentrifuge,
+  'Cherry Network Mainnet': nodeCherryMainnet,
+  'Cherry Network Testnet': nodeCherryMainnet,
   Coinversation: nodeCoinversation,
   'Competitors Club': nodeCompetitorsClub,
   'Crown Sterling': nodeCrownSterling,
