@@ -13,7 +13,7 @@ interface Props {
   children?: React.ReactNode;
   className?: string;
   label?: React.ReactNode;
-  params?: AccountId | AccountIndex | Address | string | Uint8Array | null;
+  params?: AccountId[] | AccountIndex | Address | string | Uint8Array | null;
 }
 
 function VotingPowerDisplay ({ children, className = '', label, params }: Props): React.ReactElement<Props> {
@@ -23,7 +23,6 @@ function VotingPowerDisplay ({ children, className = '', label, params }: Props)
 
   return (
     <FormatBalance
-      key={params?.toString()}
       className={className}
       label={label}
       value={votingPower}
