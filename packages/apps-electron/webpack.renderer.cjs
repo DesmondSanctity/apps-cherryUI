@@ -27,7 +27,7 @@ module.exports = merge(
         }]
       }),
       new HtmlWebpackPlugin({
-        PAGE_TITLE: 'Polkadot/Substrate Portal',
+        PAGE_TITLE: 'Cherry Network Blockchain Interface',
         inject: true,
         template: path.join(context, '../apps/public/index.html')
       })
